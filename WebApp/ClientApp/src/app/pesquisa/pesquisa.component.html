@@ -1,0 +1,30 @@
+<script language='JavaScript'>
+  function SomenteNumero(e) {
+    var tecla = (window.event) ? event.keyCode : e.which;
+    if ((tecla > 47 && tecla < 58)) return true;
+    else {
+      if (tecla == 8 || tecla == 0) return true;
+      else return false;
+    }
+  }
+</script>
+
+<h1>Pesquisar</h1>
+
+<div class="row">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input type="number" min="1" max="3" onkeypress="false" class="form-control" formControlName="valorPesquisa"/>
+    <br>
+    <br>
+    <!--<button class="btn btn-primary" (click)="getPesquisa(1)">Pesquisar</button>-->
+    <div>
+      <input type="submit" class="btn btn-primary" value="Pesquisar">
+    </div>
+    <br>
+    <br>
+  </form>
+</div>
+
+<div>
+  <p aria-live="polite">Retorno: <strong>{{ forecasts.nome }}</strong></p>
+</div>
