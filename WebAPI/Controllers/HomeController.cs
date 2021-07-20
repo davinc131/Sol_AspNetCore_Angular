@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Cors;
@@ -22,7 +23,7 @@ namespace WebAPI.Controllers
       try
       {
         var pParcelas = int.Parse(pEmpModel.Parcelas);
-        var pValor = Decimal.Parse(pEmpModel.ValorParcelas);
+        var pValor = Decimal.Parse(pEmpModel.ValorParcelas.Replace('.',','), NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint);
 
         Emprestimo emprestimo = new Emprestimo(pParcelas, pValor);
         var emp = emprestimo.CalculaEmprestimo();

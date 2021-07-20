@@ -1,3 +1,4 @@
+import { LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,8 +12,12 @@ import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { EmprestimoComponent } from './emprestimo/emprestimo.component';
 import { PesquisaService } from './Service/pesquisa.service';
 import { EmprestimoService } from './Service/emprestimo.service';
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 //import { CounterComponent } from './counter/counter.component';
 //import { FetchDataComponent } from './fetch-data/fetch-data.component';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -40,6 +45,7 @@ import { EmprestimoService } from './Service/emprestimo.service';
   providers: [
     PesquisaService,
     EmprestimoService,
+    { provide: LOCALE_ID, useValue: 'pt' },
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { EmprestimoService } from '../../app/Service/emprestimo.service';
 import { IEmprestimo } from '../Model/emprestimo.interface';
@@ -36,12 +36,18 @@ export class EmprestimoComponent implements OnInit {
   }
 
   onSubmit() {
-    this.emprestimo.parcelas = String(this.form.controls["parcelas"].value);
-    this.emprestimo.valorParcelas = this.form.controls["valorParcelas"].value;
-    this.emprestimo.valorEmprestimo = "";
+    if (this.form.controls["parcelas"].value === "")
+      alert("A quantidades de parcelas é obrigatório");
+    else if (this.form.controls["valorParcelas"].value ==="")
+      alert("O valor das parcelas é obrigatório");
+    else {
+      this.emprestimo.parcelas = String(this.form.controls["parcelas"].value);
+      this.emprestimo.valorParcelas = String(this.form.controls["valorParcelas"].value);
+      this.emprestimo.valorEmprestimo = "";
 
-    this.emprestimoService.postEmprestimo(this.emprestimo).subscribe(
-      (data: IEmprestimo) => this.valor = data.valorEmprestimo
-    );
+      this.emprestimoService.postEmprestimo(this.emprestimo).subscribe(
+        (data: IEmprestimo) => this.valor = data.valorEmprestimo.replace(',','.')
+      );
+    };
   };
 }

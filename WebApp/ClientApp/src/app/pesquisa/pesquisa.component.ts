@@ -36,18 +36,23 @@ export class PesquisaComponent implements OnInit {
   }
 
   onSubmit() {
-    var pesquisa = this.form.controls["valorPesquisa"].value;
-
-    if (pesquisa === 1) {
-      this.getPesquisa(pesquisa);
-    }
-    else if (pesquisa === 2) {
-      this.getPesquisa(pesquisa);
-    } else if (pesquisa === 3) {
-      this.getPesquisa(pesquisa);
+    if (this.form.controls["valorPesquisa"].value === '') {
+      alert("Selecione um valor para pesquisa");
     }
     else {
-      alert("Os valores aceitos para este campo são 1, 2 ou 3");
+      var pesquisa = this.form.controls["valorPesquisa"].value;
+
+      if (pesquisa === 1) {
+        this.getPesquisa(pesquisa);
+      }
+      else if (pesquisa === 2) {
+        this.getPesquisa(pesquisa);
+      } else if (pesquisa === 3) {
+        this.getPesquisa(pesquisa);
+      }
+      else {
+        alert("Os valores aceitos para este campo são 1, 2 ou 3");
+      }
     }
   };
 

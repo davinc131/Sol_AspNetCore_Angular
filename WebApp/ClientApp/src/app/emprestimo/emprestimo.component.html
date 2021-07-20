@@ -1,27 +1,11 @@
-<script>
-  document.getElementById("userinput").onblur = function () {
-
-    //number-format the user input
-    this.value = parseFloat(this.value.replace(/,/g, ""))
-      .toFixed(2)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    //set the numeric value to a number input
-    document.getElementById("number").value = this.value.replace(/,/g, "")
-
-  }
-</script>
-
-
 <h1>Emprestimo</h1>
 
 <div class="row">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <label for="fparcela">Parcelas:</label><br>
-    <input class="form-control" type="number" min="1" id="fparcela" formControlName="parcelas"><br>
+    <input class="form-control" type="number" min="1" id="fparcela" formControlName="parcelas" onkeypress="return event.charCode >= 48 && event.charCode <= 57"><br>
     <label for="lvalor">Valor:</label><br>
-    <input class="form-control" type="text" id="lvalor" formControlName="valorParcelas" pattern="^\d+(,\d{1,2})?$">
+    <input class="form-control" type="number" id="valor" name="valor" formControlName="valorParcelas">
     <br />
     <br />
     <div>
@@ -33,5 +17,5 @@
 <br />
 <br />
 <div>
-  <p aria-live="polite">Retorno: <strong id="userinput">{{ valor }}</strong></p>
+  <p aria-live="polite">Retorno: <strong id="userinput">{{ valor | currency : 'BRL'}}</strong></p>
 </div>
